@@ -55,3 +55,9 @@ article .header {
     font-weight: bold;
     text-decoration: none;
 }
+
+img {
+    width: 600px;
+    max-width: 100%;
+    object-fit: contain;
+}

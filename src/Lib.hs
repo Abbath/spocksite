@@ -34,6 +34,7 @@ app = do
         time <- liftIO getCurrentTime
         psts <- liftIO posts
         html $ TL.toStrict $ index psts time
+    get (root <//> "favicon") $ file "favicon" "./static/peka.png"
     get (root <//> var) $ \post_id -> do
         file <- liftIO $ TSIO.readFile ("./posts/" ++ TS.unpack post_id)
         time <- liftIO getCurrentTime
@@ -63,6 +64,7 @@ header new = H.docTypeHtml ! HA.lang "en" $ do
         H.meta ! HA.name "viewport" ! HA.content "width=device-width, initial-scale=1"
         H.title "Abbath's Corner - $title$"
         H.link ! HA.rel "stylesheet" ! HA.href "default.css"
+        H.link ! HA.rel "icon" ! HA.type_ "image/png" ! HA.href "peka.png"
     H.body $ do
         H.header $ do
             H.div ! HA.class_ "logo" $ H.a ! HA.href "/" $ "Abbath's Corner"

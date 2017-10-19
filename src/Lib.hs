@@ -31,22 +31,25 @@ app :: SpockM () MySession MyAppState ()
 app = do
     middleware (staticPolicy (addBase "static"))
     get root $ do
-        time <- liftIO getCurrentTime
         psts <- liftIO posts
-        html $ TL.toStrict $ index psts time
+        html $ TL.toStrict $ index psts
     get (root <//> "favicon") $ file "favicon" "./static/peka.png"
     get (root <//> var) $ \post_id -> do
-        file <- liftIO $ TSIO.readFile ("./posts/" ++ TS.unpack post_id)
-        time <- liftIO getCurrentTime
-        html . TL.toStrict . renderHtml . Lib.header $ Lib.post file post_id
+        let filename = "./posts/" ++ TS.unpack post_id
+        fileExists <- liftIO $ doesFileExist filename
+        if fileExists
+            then do
+                file <- liftIO $ TSIO.readFile filename
+                html . TL.toStrict . renderHtml . Lib.header $ Lib.post file post_id
+            else redirect "/"
 
 convertToData post_id = let year = TS.take 4 post_id
                             month = TS.take 2 . TS.drop 5 $ post_id
                             day = TS.take 2 . TS.drop 8 $ post_id
                         in TS.concat [day, ".", month, ".", year]
 
-index :: [(TS.Text, TS.Text)] -> UTCTime -> TL.Text
-index s time = renderHtml $ Lib.header $
+index :: [(TS.Text, TS.Text)] -> TL.Text
+index s = renderHtml $ Lib.header $
         forM_ s (\(post_id, x) -> do
             H.br
             Lib.post x post_id)

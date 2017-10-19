@@ -9,8 +9,6 @@ import           Data.List
 import qualified Data.Text                     as TS
 import qualified Data.Text.IO                  as TSIO
 import qualified Data.Text.Lazy                as TL
-import           Data.Time.Clock
-import           Data.Time.Format
 import           Network.Wai.Middleware.Static
 import           System.Directory
 import           Text.Blaze.Html.Renderer.Text (renderHtml)
@@ -23,9 +21,10 @@ import           Web.Spock
 data MySession = EmptySession
 data MyAppState = EmptyState
 
+posts :: IO [(TS.Text, TS.Text)]
 posts = do
-    files <- (sortBy (flip compare)) <$> listDirectory "./posts"
-    zip (map TS.pack files) <$> mapM (TSIO.readFile . ("./posts/"++)) files
+    filenames <- (sortBy (flip compare)) <$> listDirectory "./posts"
+    zip (map TS.pack filenames) <$> mapM (TSIO.readFile . ("./posts/"++)) filenames
 
 app :: SpockM () MySession MyAppState ()
 app = do
@@ -39,10 +38,11 @@ app = do
         fileExists <- liftIO $ doesFileExist filename
         if fileExists
             then do
-                file <- liftIO $ TSIO.readFile filename
-                html . TL.toStrict . renderHtml . Lib.header $ Lib.post file post_id
+                fileContent <- liftIO $ TSIO.readFile filename
+                html . TL.toStrict . renderHtml . Lib.header $ Lib.post fileContent post_id
             else redirect "/"
 
+convertToData :: TS.Text -> TS.Text
 convertToData post_id = let year = TS.take 4 post_id
                             month = TS.take 2 . TS.drop 5 $ post_id
                             day = TS.take 2 . TS.drop 8 $ post_id
@@ -51,8 +51,8 @@ convertToData post_id = let year = TS.take 4 post_id
 index :: [(TS.Text, TS.Text)] -> TL.Text
 index s = renderHtml $ Lib.header $
         forM_ s (\(post_id, x) -> do
-            H.br
-            Lib.post x post_id)
+            Lib.post x post_id
+            H.br)
 
 post x post_id = do
     (H.div . markdown def . TL.fromStrict) x
@@ -65,13 +65,13 @@ header new = H.docTypeHtml ! HA.lang "en" $ do
         H.meta ! HA.charset "utf-8"
         H.meta ! HA.httpEquiv "x-ua-compatible" ! HA.content "ie=edge"
         H.meta ! HA.name "viewport" ! HA.content "width=device-width, initial-scale=1"
-        H.title "Abbath's Corner - $title$"
+        H.title "Abbath's Corner"
         H.link ! HA.rel "stylesheet" ! HA.href "default.css"
         H.link ! HA.rel "icon" ! HA.type_ "image/png" ! HA.href "peka.png"
     H.body $ do
-        H.header $ do
-            H.div ! HA.class_ "logo" $ H.a ! HA.href "/" $ "Abbath's Corner"
-            H.nav $ H.a ! HA.href "/" $ "Home"
+        H.header $ H.div ! HA.class_ "logo" $ do
+            H.a ! HA.href "/" $ "Abbath's Corner"
+            H.br
         new
 
 

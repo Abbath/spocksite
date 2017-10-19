@@ -1,6 +1,7 @@
 body {
     color: black;
     font-size: 16px;
+    font-family: sans-serif;
     margin: 0px auto 0px auto;
     width: 600px;
 }
@@ -43,14 +44,14 @@ h2 {
 
 article .header {
     color: #555;
-    font-size: 14px;
+    font-size: 20px;
     font-style: italic;
 }
 
 .logo a {
     color: black;
     float: left;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold;
     text-decoration: none;
 }

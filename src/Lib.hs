@@ -32,7 +32,6 @@ app = do
     get root $ do
         psts <- liftIO posts
         html $ TL.toStrict $ index psts
-    get (root <//> "favicon") $ file "favicon" "./static/peka.png"
     get (root <//> var) $ \post_id -> do
         let filename = "./posts/" ++ TS.unpack post_id
         fileExists <- liftIO $ doesFileExist filename

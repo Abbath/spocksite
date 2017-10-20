@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeApplications  #-}
 module Lib
     ( app, MySession(..), MyAppState(..)
     ) where
@@ -23,7 +24,7 @@ data MyAppState = EmptyState
 
 posts :: IO [(TS.Text, TS.Text)]
 posts = do
-    filenames <- (sortBy (flip compare)) <$> listDirectory "./posts"
+    filenames <- sortBy (flip compare) <$> listDirectory "./posts"
     zip (map TS.pack filenames) <$> mapM (TSIO.readFile . ("./posts/"++)) filenames
 
 app :: SpockM () MySession MyAppState ()
@@ -38,7 +39,7 @@ app = do
         if fileExists
             then do
                 fileContent <- liftIO $ TSIO.readFile filename
-                html . TL.toStrict . renderHtml . Lib.header $ Lib.post fileContent post_id
+                html . TL.toStrict . renderHtml . Lib.page $ Lib.post fileContent post_id
             else redirect "/"
 
 convertToData :: TS.Text -> TS.Text
@@ -48,7 +49,7 @@ convertToData post_id = let year = TS.take 4 post_id
                         in TS.concat [day, ".", month, ".", year]
 
 index :: [(TS.Text, TS.Text)] -> TL.Text
-index s = renderHtml $ Lib.header $
+index s = renderHtml $ Lib.page $
         forM_ s (\(post_id, x) -> do
             Lib.post x post_id
             H.br)
@@ -59,7 +60,7 @@ post x post_id = do
         H.toHtml $ TS.append (convertToData post_id) " "
         H.a ! HA.href (H.textValue $ TS.append "/" post_id) $ "Link"
 
-header new = H.docTypeHtml ! HA.lang "en" $ do
+page new = H.docTypeHtml ! HA.lang "en" $ do
     H.head $ do
         H.meta ! HA.charset "utf-8"
         H.meta ! HA.httpEquiv "x-ua-compatible" ! HA.content "ie=edge"
@@ -68,9 +69,16 @@ header new = H.docTypeHtml ! HA.lang "en" $ do
         H.link ! HA.rel "stylesheet" ! HA.href "default.css"
         H.link ! HA.rel "icon" ! HA.type_ "image/png" ! HA.href "peka.png"
     H.body $ do
-        H.header $ H.div ! HA.class_ "logo" $ do
-            H.a ! HA.href "/" $ "Abbath's Corner"
-            H.br
+        Lib.header
         new
+        Lib.footer
 
+header = H.header $ H.div ! HA.class_ "logo" $ do
+    H.a ! HA.href "/" $ "Abbath's Corner"
+    H.br
 
+footer = H.footer $ do
+    H.div ! HA.style "float: left" $ "Abbath © 2017"
+    H.div $ do
+        H.toHtml @TS.Text "Powered by "
+        H.a ! HA.href "https://spock.li" $ "Spock"

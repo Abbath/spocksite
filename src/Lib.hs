@@ -60,7 +60,7 @@ post x post_id = do
         H.toHtml $ TS.append (convertToData post_id) " "
         H.a ! HA.href (H.textValue $ TS.append "/" post_id) $ "Link"
 
-page new = H.docTypeHtml ! HA.lang "en" $ do
+page new = H.docTypeHtml $ do
     H.head $ do
         H.meta ! HA.charset "utf-8"
         H.meta ! HA.httpEquiv "x-ua-compatible" ! HA.content "ie=edge"

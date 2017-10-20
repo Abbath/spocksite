@@ -1,6 +1,6 @@
+{-# LANGUAGE TypeApplications #-}
 module Main where
 
-import           Data.Maybe
 import           System.Environment
 import           Web.Spock
 import           Web.Spock.Config
@@ -11,5 +11,5 @@ main :: IO ()
 main = do
     port <- lookupEnv "PORT"
     spockCfg <- defaultSpockCfg EmptySession PCNoDatabase EmptyState
-    runSpock (maybe (3000 :: Int) read port) (spock spockCfg app)
+    runSpock (maybe @Int 3000 read port) $ spock spockCfg app
 

@@ -29,7 +29,7 @@ posts = do
 
 app :: SpockM () MySession MyAppState ()
 app = do
-    middleware (staticPolicy (addBase "static"))
+    middleware . staticPolicy $ addBase "static"
     get root $ do
         psts <- liftIO posts
         html $ TL.toStrict $ index psts
@@ -70,7 +70,7 @@ page new = H.docTypeHtml ! HA.lang "en" $ do
         H.link ! HA.rel "icon" ! HA.type_ "image/png" ! HA.href "peka.png"
     H.body $ do
         Lib.header
-        new
+        _ <- new
         Lib.footer
 
 header = H.header $ do

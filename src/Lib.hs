@@ -73,8 +73,9 @@ page new = H.docTypeHtml ! HA.lang "en" $ do
         new
         Lib.footer
 
-header = H.header $ H.div ! HA.class_ "logo" $ do
-    H.a ! HA.href "/" $ "Abbath's Corner"
+header = H.header $ do
+    H.div ! HA.style "float: left" ! HA.class_ "logo" $ H.a ! HA.href "/" $ "Abbath's Corner"
+    H.div $ H.a ! HA.href "/" ! HA.class_ "logo" $ H.img ! HA.src "peka.png"
     H.br
 
 footer = H.footer $ do

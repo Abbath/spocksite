@@ -42,10 +42,11 @@ app = do
                 html . TL.toStrict . renderHtml . Lib.page $ Lib.post fileContent post_id
             else redirect "/"
 
-convertToData :: TS.Text -> TS.Text
-convertToData post_id = let year = TS.take 4 post_id
-                            month = TS.take 2 . TS.drop 5 $ post_id
-                            day = TS.take 2 . TS.drop 8 $ post_id
+convertToDate :: TS.Text -> TS.Text
+convertToDate post_id = let mid x y = TS.take y . TS.drop x
+                            year = mid 0 4 post_id
+                            month = mid 5 2 $ post_id
+                            day = mid 8 2 $ post_id
                         in TS.concat [day, ".", month, ".", year]
 
 index :: [(TS.Text, TS.Text)] -> TL.Text
@@ -57,7 +58,7 @@ index s = renderHtml $ Lib.page $
 post x post_id = do
     (H.div . markdown def . TL.fromStrict) x
     H.div $ do
-        H.toHtml $ TS.append (convertToData post_id) " "
+        H.toHtml $ TS.append (convertToDate post_id) " "
         H.a ! HA.href (H.textValue $ TS.append "/" post_id) $ "Link"
 
 page new = H.docTypeHtml $ do

@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/abbath
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://abbath.herokuapp.com
+  * I am abbath (https://keybase.io/abbath) on keybase.
+  * I have a public key ASCw5ckxJzUNVnTMQFyvLr4BSdC0wGuaHhPLdqUV23KHfAo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120b0e5c93127350d5674cc405caf2ebe0149d0b4c06b9a1e13cb76a515db72877c0a",
+      "host": "keybase.io",
+      "kid": "0120b0e5c93127350d5674cc405caf2ebe0149d0b4c06b9a1e13cb76a515db72877c0a",
+      "uid": "c73bd304297074805b91ce7fd154bd19",
+      "username": "abbath"
+    },
+    "merkle_root": {
+      "ctime": 1522317886,
+      "hash": "07141d542e7776564de3c8d2327c5d4474333ccce4d5508fe32b2df949871c0783efdae64eebefc48bd9b6a0c681f319bfa41fa1e6bb62f919b5d75e8f4d6c4b",
+      "hash_meta": "de96c9a9bcf9827f3325ca23dc14614f4d3bfeba347fea0b71971b8cd80ec086",
+      "seqno": 2305576
+    },
+    "service": {
+      "hostname": "abbath.herokuapp.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.45"
+  },
+  "ctime": 1522317932,
+  "expire_in": 504576000,
+  "prev": "02924e070cfcb6eae270732897072b6b833af91efc0a8627368398e13629bee5",
+  "seqno": 8,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgsOXJMSc1DVZ0zEBcry6+AUnQtMBrmh4Ty3alFdtyh3wKp3BheWxvYWTFA0p7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwYjBlNWM5MzEyNzM1MGQ1Njc0Y2M0MDVjYWYyZWJlMDE0OWQwYjRjMDZiOWExZTEzY2I3NmE1MTVkYjcyODc3YzBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwYjBlNWM5MzEyNzM1MGQ1Njc0Y2M0MDVjYWYyZWJlMDE0OWQwYjRjMDZiOWExZTEzY2I3NmE1MTVkYjcyODc3YzBhIiwidWlkIjoiYzczYmQzMDQyOTcwNzQ4MDViOTFjZTdmZDE1NGJkMTkiLCJ1c2VybmFtZSI6ImFiYmF0aCJ9LCJtZXJrbGVfcm9vdCI6eyJjdGltZSI6MTUyMjMxNzg4NiwiaGFzaCI6IjA3MTQxZDU0MmU3Nzc2NTY0ZGUzYzhkMjMyN2M1ZDQ0NzQzMzNjY2NlNGQ1NTA4ZmUzMmIyZGY5NDk4NzFjMDc4M2VmZGFlNjRlZWJlZmM0OGJkOWI2YTBjNjgxZjMxOWJmYTQxZmExZTZiYjYyZjkxOWI1ZDc1ZThmNGQ2YzRiIiwiaGFzaF9tZXRhIjoiZGU5NmM5YTliY2Y5ODI3ZjMzMjVjYTIzZGMxNDYxNGY0ZDNiZmViYTM0N2ZlYTBiNzE5NzFiOGNkODBlYzA4NiIsInNlcW5vIjoyMzA1NTc2fSwic2VydmljZSI6eyJob3N0bmFtZSI6ImFiYmF0aC5oZXJva3VhcHAuY29tIiwicHJvdG9jb2wiOiJodHRwczoifSwidHlwZSI6IndlYl9zZXJ2aWNlX2JpbmRpbmciLCJ2ZXJzaW9uIjoxfSwiY2xpZW50Ijp7Im5hbWUiOiJrZXliYXNlLmlvIGdvIGNsaWVudCIsInZlcnNpb24iOiIxLjAuNDUifSwiY3RpbWUiOjE1MjIzMTc5MzIsImV4cGlyZV9pbiI6NTA0NTc2MDAwLCJwcmV2IjoiMDI5MjRlMDcwY2ZjYjZlYWUyNzA3MzI4OTcwNzJiNmI4MzNhZjkxZWZjMGE4NjI3MzY4Mzk4ZTEzNjI5YmVlNSIsInNlcW5vIjo4LCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQCDrpYwKR6F2k9prWz2OqjUh9QGKBIy86fsMh5Jj6I3I9fP7ZJ8QJgfeEDl2p+sb1g9msIN/1Vhgxr1mSDf43wmoc2lnX3R5cGUgpGhhc2iCpHR5cGUIpXZhbHVlxCB3MDG+63EIetXdsQy3dWIfOqL2JcV325dlR9LtWPUgh6N0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/abbath
+
+==================================================================

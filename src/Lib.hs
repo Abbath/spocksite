@@ -70,6 +70,8 @@ page new = H.docTypeHtml $ do
         H.link ! HA.rel "stylesheet" ! HA.href "default.css"
         H.link ! HA.rel "icon" ! HA.type_ "image/png" ! HA.href "peka.png"
     H.body $ do
+        H.script ! HA.src "https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js" $ ""
+        H.script "var sf = new Snowflakes();"
         Lib.header
         _ <- new
         Lib.footer
